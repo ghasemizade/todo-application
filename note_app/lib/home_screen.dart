@@ -17,46 +17,25 @@ class _homeScreenState extends State<homeScreen> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
+      backgroundColor: Color(0xffE5E5E5),
       body: Center(
-        child: Container(
-          child: Column(
-            mainAxisAlignment: MainAxisAlignment.center,
-            children: [
-              TextField(
-                controller: controller,
+        child: Padding(
+          padding: EdgeInsets.symmetric(horizontal: 20),
+          child: Container(
+            height: 132,
+            width: double.infinity,
+            decoration: BoxDecoration(
+              color: Color(0xffffffff),
+              borderRadius: BorderRadius.circular(15),
+            ),
+            child: Padding(
+              padding: EdgeInsets.all(12),
+              child: Row(
+                children: [
+                  Image.asset('assets/images/hard_working.png'),
+                ],
               ),
-              Text(inputText),
-              ElevatedButton(
-                onPressed: () {
-                  setState(() {
-                    inputText = controller.text;
-                  });
-                },
-                child: Text('read from textFiled'),
-              ),
-              ElevatedButton(
-                style: ElevatedButton.styleFrom(primary: Colors.pink),
-                onPressed: () {
-                  box.put('name1', 'Hosein');
-                },
-                child: Text('create'),
-              ),
-              ElevatedButton(
-                style: ElevatedButton.styleFrom(primary: Colors.green),
-                onPressed: () {
-                  var text = box.get('name1');
-                  print(text);
-                },
-                child: Text('read'),
-              ),
-              ElevatedButton(
-                style: ElevatedButton.styleFrom(primary: Colors.green),
-                onPressed: () {
-                  box.put('name1', 'Javad');
-                },
-                child: Text('update'),
-              ),
-            ],
+            ),
           ),
         ),
       ),
