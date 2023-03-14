@@ -1,4 +1,6 @@
 import 'package:flutter/material.dart';
+import 'package:hive/hive.dart';
+import 'package:note_app/todo.dart';
 
 class addTaskScreen extends StatefulWidget {
   const addTaskScreen({super.key});
@@ -11,6 +13,10 @@ class _addTaskScreenState extends State<addTaskScreen> {
   FocusNode wicher0 = FocusNode();
   FocusNode wicher1 = FocusNode();
 
+  final TextEditingController textFiledTaskTitle = TextEditingController();
+  final TextEditingController textFiledTaskSubTitle = TextEditingController();
+
+  final Box = Hive.box<task>('taskBox');
   @override
   void initState() {
     super.initState();
@@ -34,6 +40,7 @@ class _addTaskScreenState extends State<addTaskScreen> {
             Padding(
               padding: EdgeInsets.symmetric(horizontal: 15),
               child: TextField(
+                controller: textFiledTaskTitle,
                 style: TextStyle(fontFamily: 'gm', fontSize: 18),
                 focusNode: wicher0,
                 decoration: InputDecoration(
@@ -72,6 +79,7 @@ class _addTaskScreenState extends State<addTaskScreen> {
             Padding(
               padding: EdgeInsets.symmetric(horizontal: 15),
               child: TextField(
+                controller: textFiledTaskSubTitle,
                 style: TextStyle(fontFamily: 'gm', fontSize: 18),
                 maxLines: 3,
                 focusNode: wicher1,
@@ -105,6 +113,25 @@ class _addTaskScreenState extends State<addTaskScreen> {
                 ),
               ),
             ),
+            Spacer(),
+            ClipRRect(
+              borderRadius: BorderRadius.circular(15),
+              child: ElevatedButton(
+                onPressed: () {
+                  String taskTitle = textFiledTaskTitle.text;
+                  String taskSubTitle = textFiledTaskSubTitle.text;
+                  addTask(taskTitle, taskSubTitle);
+                },
+                child: Text('Add task'),
+                style: ElevatedButton.styleFrom(
+                  backgroundColor: Color(0xff18daa3),
+                  minimumSize: Size(200, 44),
+                ),
+              ),
+            ),
+            SizedBox(
+              height: 38,
+            ),
           ],
         ),
       ),
@@ -116,5 +143,11 @@ class _addTaskScreenState extends State<addTaskScreen> {
     wicher0.dispose();
     wicher1.dispose();
     super.dispose();
+  }
+
+  addTask(String taskTitle, String taskSubTitle) {
+    var taskTest = task(title: taskTitle, subTitle: taskSubTitle);
+    Box.put(1, taskTest);
+    print(Box.get(1)!.title);
   }
 }
