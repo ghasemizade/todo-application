@@ -23,81 +23,48 @@ class _homeScreenState extends State<homeScreen> {
       body: Center(
         child: Padding(
           padding: EdgeInsets.symmetric(horizontal: 20),
-          child: Container(
-            height: 132,
-            width: double.infinity,
-            decoration: BoxDecoration(
-              color: Color(0xffffffff),
-              borderRadius: BorderRadius.circular(15),
-            ),
-            child: Padding(
-              padding: EdgeInsets.all(12),
-              child: Row(
+          child: getTaskItem(),
+        ),
+      ),
+    );
+  }
+
+  Container getTaskItem() {
+    return Container(
+      height: 132,
+      width: double.infinity,
+      decoration: BoxDecoration(
+        color: Color(0xffffffff),
+        borderRadius: BorderRadius.circular(15),
+      ),
+      child: Padding(
+        padding: EdgeInsets.all(12),
+        child: getMainContent(),
+      ),
+    );
+  }
+
+  Row getMainContent() {
+    return Row(
+      children: [
+        Image.asset('assets/images/hard_working.png'),
+        SizedBox(
+          width: 30,
+        ),
+        Expanded(
+          child: Column(
+            crossAxisAlignment: CrossAxisAlignment.start,
+            children: [
+              Row(
+                mainAxisAlignment: MainAxisAlignment.spaceBetween,
                 children: [
-                  Image.asset('assets/images/hard_working.png'),
-                  Column(
-                    children: [
-                      Text('time'),
-                      Text('set'),
-                      Row(
-                        children: [
-                          // Time
-                          Container(
-                            height: 28,
-                            width: 83,
-                            decoration: BoxDecoration(
-                              color: Color(0xff18daa3),
-                              borderRadius: BorderRadius.circular(30),
-                            ),
-                            child: Padding(
-                              padding: EdgeInsets.symmetric(
-                                  horizontal: 12, vertical: 6),
-                              child: Row(
-                                children: [
-                                  Text('12:00'),
-                                  SizedBox(
-                                    width: 8,
-                                  ),
-                                  Image.asset('assets/images/icon_time.png')
-                                ],
-                              ),
-                            ),
-                          ),
-                          SizedBox(
-                            width: 15,
-                          ),
-                          // Edit
-                          Container(
-                            height: 32,
-                            width: 86,
-                            decoration: BoxDecoration(
-                              color: Color(0xffE2F6F1),
-                              borderRadius: BorderRadius.circular(30),
-                            ),
-                            child: Padding(
-                              padding: EdgeInsets.symmetric(
-                                  horizontal: 12, vertical: 6),
-                              child: Row(
-                                children: [
-                                  Text(
-                                    'edit',
-                                    style: TextStyle(
-                                      color: Color(0xff18daa3),
-                                    ),
-                                  ),
-                                  SizedBox(
-                                    width: 8,
-                                  ),
-                                  Image.asset('assets/images/icon_edit.png'),
-                                ],
-                              ),
-                            ),
-                          ),
-                        ],
-                      ),
-                    ],
+                  Text(
+                    'workTime',
+                    style: TextStyle(
+                      fontFamily: 'FineCollege',
+                      fontSize: 22,
+                    ),
                   ),
-                  Spacer(),
                   MSHCheckbox(
                     size: 32,
                     value: isChecked,
@@ -113,10 +80,76 @@ class _homeScreenState extends State<homeScreen> {
                   ),
                 ],
               ),
+              Text('secondtime'),
+              Spacer(),
+              getTime_Edit(),
+            ],
+          ),
+        ),
+      ],
+    );
+  }
+
+  Row getTime_Edit() {
+    return Row(
+      mainAxisAlignment: MainAxisAlignment.end,
+      children: [
+        // Time
+        Container(
+          height: 28,
+          width: 83,
+          decoration: BoxDecoration(
+            color: Color(0xff18daa3),
+            borderRadius: BorderRadius.circular(30),
+          ),
+          child: Padding(
+            padding: EdgeInsets.symmetric(horizontal: 12, vertical: 6),
+            child: Row(
+              children: [
+                Text(
+                  '12:00',
+                  style: TextStyle(
+                    color: Colors.white,
+                  ),
+                ),
+                SizedBox(
+                  width: 8,
+                ),
+                Image.asset('assets/images/icon_time.png')
+              ],
             ),
           ),
         ),
-      ),
+        SizedBox(
+          width: 15,
+        ),
+        // Edit
+        Container(
+          height: 32,
+          width: 86,
+          decoration: BoxDecoration(
+            color: Color(0xffE2F6F1),
+            borderRadius: BorderRadius.circular(30),
+          ),
+          child: Padding(
+            padding: EdgeInsets.symmetric(horizontal: 12, vertical: 6),
+            child: Row(
+              children: [
+                Text(
+                  'edit',
+                  style: TextStyle(
+                    color: Color(0xff18daa3),
+                  ),
+                ),
+                SizedBox(
+                  width: 8,
+                ),
+                Image.asset('assets/images/icon_edit.png'),
+              ],
+            ),
+          ),
+        ),
+      ],
     );
   }
 }

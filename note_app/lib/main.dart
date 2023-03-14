@@ -14,6 +14,9 @@ class noteApp extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
+      theme: ThemeData(
+        fontFamily: 'FineCollege',
+      ),
       home: homeScreen(),
       debugShowCheckedModeBanner: false,
     );
