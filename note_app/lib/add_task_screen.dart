@@ -41,7 +41,10 @@ class _addTaskScreenState extends State<addTaskScreen> {
               padding: EdgeInsets.symmetric(horizontal: 15),
               child: TextField(
                 controller: textFiledTaskTitle,
-                style: TextStyle(fontFamily: 'gm', fontSize: 18),
+                style: TextStyle(
+                    fontFamily: 'gm',
+                    fontSize: 18,
+                    fontWeight: FontWeight.w600),
                 focusNode: wicher0,
                 decoration: InputDecoration(
                   labelText: 'task',
@@ -146,8 +149,7 @@ class _addTaskScreenState extends State<addTaskScreen> {
   }
 
   addTask(String taskTitle, String taskSubTitle) {
-    var taskTest = task(title: taskTitle, subTitle: taskSubTitle);
-    Box.put(1, taskTest);
-    print(Box.get(1)!.title);
+    var AddTask = task(title: taskTitle, subTitle: taskSubTitle);
+    Box.add(AddTask);
   }
 }

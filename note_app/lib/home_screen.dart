@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:hive/hive.dart';
 import 'package:msh_checkbox/msh_checkbox.dart';
+import 'package:note_app/todo.dart';
 
 class homeScreen extends StatefulWidget {
   const homeScreen({super.key});
@@ -16,6 +17,8 @@ class _homeScreenState extends State<homeScreen> {
   var box = Hive.box('names');
   bool isChecked = false;
 
+  var taskBox = Hive.box<task>('taskBox');
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -23,7 +26,13 @@ class _homeScreenState extends State<homeScreen> {
       body: Center(
         child: Padding(
           padding: EdgeInsets.symmetric(horizontal: 20),
-          child: getTaskItem(),
+          child: ListView.builder(
+            itemCount: taskBox.values.length,
+            itemBuilder: ((context, index) {
+              var task = taskBox.values.toList()[index];
+              return Text(task.title);
+            }),
+          ),
         ),
       ),
     );

@@ -21,7 +21,7 @@ class noteApp extends StatelessWidget {
       theme: ThemeData(
         fontFamily: 'FineCollege',
       ),
-      home: addTaskScreen(),
+      home: homeScreen(),
       debugShowCheckedModeBanner: false,
     );
   }
