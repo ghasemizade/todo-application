@@ -42,7 +42,7 @@ class _homeScreenState extends State<homeScreen> {
           _navigateToAddTask(context);
         },
         backgroundColor: Color(0xff18DAA3),
-        child: Image.asset('assets/images/icon_add.png'),
+        child: Icon(Icons.add),
       ),
     );
   }
