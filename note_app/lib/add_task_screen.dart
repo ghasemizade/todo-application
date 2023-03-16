@@ -105,7 +105,7 @@ class _addTaskScreenState extends State<addTaskScreen> {
               ),
             ),
             SizedBox(
-              height: 70,
+              height: 40,
             ),
             Padding(
               padding: EdgeInsets.symmetric(horizontal: 15),
