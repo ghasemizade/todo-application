@@ -35,7 +35,31 @@ class _addTaskScreenState extends State<addTaskScreen> {
         child: Column(
           children: [
             SizedBox(
-              height: 100,
+              height: 50,
+            ),
+            Row(
+              children: [
+                Padding(
+                  padding: EdgeInsets.only(left: 15),
+                  child: ElevatedButton(
+                    onPressed: () {},
+                    style: ElevatedButton.styleFrom(
+                        shape: RoundedRectangleBorder(
+                          borderRadius: BorderRadius.circular(50),
+                        ),
+                        backgroundColor: Color(0xff18DAA3),
+                        elevation: 5,
+                        shadowColor: Colors.black),
+                    child: Container(
+                      height: 60,
+                      width: 20,
+                    ),
+                  ),
+                ),
+              ],
+            ),
+            SizedBox(
+              height: 80,
             ),
             Padding(
               padding: EdgeInsets.symmetric(horizontal: 15),
@@ -49,8 +73,8 @@ class _addTaskScreenState extends State<addTaskScreen> {
                 decoration: InputDecoration(
                   labelText: 'task',
                   labelStyle: TextStyle(
-                    fontFamily: 'FineCollege',
-                    fontSize: 20,
+                    fontFamily: 'lato',
+                    fontSize: 28,
                     color: wicher0.hasFocus
                         ? Color(0xff18daa3)
                         : Color(0xffc5c5c5),
@@ -77,7 +101,7 @@ class _addTaskScreenState extends State<addTaskScreen> {
               ),
             ),
             SizedBox(
-              height: 100,
+              height: 70,
             ),
             Padding(
               padding: EdgeInsets.symmetric(horizontal: 15),
@@ -89,8 +113,8 @@ class _addTaskScreenState extends State<addTaskScreen> {
                 decoration: InputDecoration(
                   labelText: 'description',
                   labelStyle: TextStyle(
-                    fontFamily: 'FineCollege',
-                    fontSize: 20,
+                    fontFamily: 'lato',
+                    fontSize: 28,
                     color: wicher0.hasFocus
                         ? Color(0xffc5c5c5)
                         : Color(0xff18daa3),

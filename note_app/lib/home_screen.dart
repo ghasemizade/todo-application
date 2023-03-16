@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:hive/hive.dart';
 import 'package:msh_checkbox/msh_checkbox.dart';
+import 'package:note_app/add_task_screen.dart';
 import 'package:note_app/todo.dart';
 import 'package:note_app/widget_task.dart';
 
@@ -36,6 +37,18 @@ class _homeScreenState extends State<homeScreen> {
           ),
         ),
       ),
+      floatingActionButton: FloatingActionButton(
+        onPressed: () {
+          _navigateToNextScreen(context);
+        },
+        backgroundColor: Color(0xff18DAA3),
+        child: Image.asset('assets/images/icon_add.png'),
+      ),
     );
+  }
+
+  void _navigateToNextScreen(BuildContext context) {
+    Navigator.of(context)
+        .push(MaterialPageRoute(builder: (context) => addTaskScreen()));
   }
 }
