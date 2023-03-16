@@ -39,7 +39,7 @@ class _homeScreenState extends State<homeScreen> {
       ),
       floatingActionButton: FloatingActionButton(
         onPressed: () {
-          _navigateToNextScreen(context);
+          _navigateToAddTask(context);
         },
         backgroundColor: Color(0xff18DAA3),
         child: Image.asset('assets/images/icon_add.png'),
@@ -47,7 +47,7 @@ class _homeScreenState extends State<homeScreen> {
     );
   }
 
-  void _navigateToNextScreen(BuildContext context) {
+  void _navigateToAddTask(BuildContext context) {
     Navigator.of(context)
         .push(MaterialPageRoute(builder: (context) => addTaskScreen()));
   }

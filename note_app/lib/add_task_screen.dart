@@ -119,9 +119,9 @@ class _addTaskScreenState extends State<addTaskScreen> {
                   labelStyle: TextStyle(
                     fontFamily: 'lato',
                     fontSize: 28,
-                    color: wicher0.hasFocus
-                        ? Color(0xffc5c5c5)
-                        : Color(0xff18daa3),
+                    color: wicher1.hasFocus
+                        ? Color(0xff18daa3)
+                        : Color(0xffC5C5C5),
                   ),
                   enabledBorder: OutlineInputBorder(
                     borderRadius: BorderRadius.all(
@@ -153,7 +153,10 @@ class _addTaskScreenState extends State<addTaskScreen> {
                   String taskSubTitle = textFiledTaskSubTitle.text;
                   addTask(taskTitle, taskSubTitle);
                 },
-                child: Text('Add task'),
+                child: Text(
+                  'Add Task',
+                  style: TextStyle(fontFamily: 'lato', fontSize: 20),
+                ),
                 style: ElevatedButton.styleFrom(
                   backgroundColor: Color(0xff18daa3),
                   minimumSize: Size(200, 44),
@@ -167,13 +170,6 @@ class _addTaskScreenState extends State<addTaskScreen> {
         ),
       ),
     );
-  }
-
-  @override
-  void dispose() {
-    wicher0.dispose();
-    wicher1.dispose();
-    super.dispose();
   }
 
   addTask(String taskTitle, String taskSubTitle) {
