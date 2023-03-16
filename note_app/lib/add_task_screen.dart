@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:hive/hive.dart';
+import 'package:note_app/home_screen.dart';
 import 'package:note_app/todo.dart';
 
 class addTaskScreen extends StatefulWidget {
@@ -42,7 +43,9 @@ class _addTaskScreenState extends State<addTaskScreen> {
                 Padding(
                   padding: EdgeInsets.only(left: 15),
                   child: ElevatedButton(
-                    onPressed: () {},
+                    onPressed: () {
+                      _navigateToBackHome(context);
+                    },
                     style: ElevatedButton.styleFrom(
                         shape: RoundedRectangleBorder(
                           borderRadius: BorderRadius.circular(50),
@@ -176,5 +179,10 @@ class _addTaskScreenState extends State<addTaskScreen> {
   addTask(String taskTitle, String taskSubTitle) {
     var AddTask = Task(title: taskTitle, subTitle: taskSubTitle);
     Box.add(AddTask);
+  }
+
+  void _navigateToBackHome(BuildContext context) {
+    Navigator.of(context)
+        .push(MaterialPageRoute(builder: (context) => homeScreen()));
   }
 }
