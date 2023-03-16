@@ -52,7 +52,8 @@ class _addTaskScreenState extends State<addTaskScreen> {
                         shadowColor: Colors.black),
                     child: Container(
                       height: 60,
-                      width: 20,
+                      width: 30,
+                      child: Icon(Icons.arrow_back_ios_rounded),
                     ),
                   ),
                 ),
