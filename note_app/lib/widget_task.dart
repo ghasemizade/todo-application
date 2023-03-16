@@ -10,7 +10,14 @@ class taskWidget extends StatefulWidget {
 }
 
 class _taskWidgetState extends State<taskWidget> {
-  bool isDone = false;
+  bool isCheckBox = false;
+
+  @override
+  void initState() {
+    // TODO: implement initState
+    super.initState();
+    isCheckBox = widget.task.isDone;
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -21,7 +28,9 @@ class _taskWidgetState extends State<taskWidget> {
     return GestureDetector(
       onTap: () {
         setState(() {
-          isDone = !isDone;
+          isCheckBox = !isCheckBox;
+          widget.task.isDone = isCheckBox;
+          widget.task.save();
         });
       },
       child: Container(
@@ -59,31 +68,35 @@ class _taskWidgetState extends State<taskWidget> {
                 children: [
                   Text(
                     widget.task.title,
+                    overflow: TextOverflow.ellipsis,
                     style: TextStyle(
                       fontFamily: 'lato',
                       fontSize: 18,
                     ),
                   ),
-                  Checkbox(
-                    value: isDone,
-                    onChanged: (isChecked) {},
-                  )
-                  // MSHCheckbox(
-                  //   size: 32,
-                  //   value: isDone,
-                  //   colorConfig: MSHColorConfig.fromCheckedUncheckedDisabled(
-                  //     checkedColor: Color(0xff18daa3),
-                  //   ),
-                  //   style: MSHCheckboxStyle.stroke,
-                  //   onChanged: (selected) {
-                  //     setState(() {
-                  //       isDone = selected;
-                  //     });
-                  //   },
-                  // ),
+                  // Checkbox(
+                  //   value: isCheckBox,
+                  //   onChanged: (isChecked) {},
+                  // )
+                  MSHCheckbox(
+                    size: 32,
+                    value: isCheckBox,
+                    colorConfig: MSHColorConfig.fromCheckedUncheckedDisabled(
+                      checkedColor: Color(0xff18daa3),
+                    ),
+                    style: MSHCheckboxStyle.stroke,
+                    onChanged: (selected) {
+                      setState(() {
+                        isCheckBox = selected;
+                      });
+                    },
+                  ),
                 ],
               ),
-              Text(widget.task.subTitle),
+              Text(
+                widget.task.subTitle,
+                overflow: TextOverflow.ellipsis,
+              ),
               Spacer(),
               getTime_Edit(),
             ],
