@@ -16,7 +16,7 @@ class _addTaskScreenState extends State<addTaskScreen> {
   final TextEditingController textFiledTaskTitle = TextEditingController();
   final TextEditingController textFiledTaskSubTitle = TextEditingController();
 
-  final Box = Hive.box<task>('taskBox');
+  final Box = Hive.box<Task>('taskBox');
   @override
   void initState() {
     super.initState();
@@ -149,7 +149,7 @@ class _addTaskScreenState extends State<addTaskScreen> {
   }
 
   addTask(String taskTitle, String taskSubTitle) {
-    var AddTask = task(title: taskTitle, subTitle: taskSubTitle);
+    var AddTask = Task(title: taskTitle, subTitle: taskSubTitle);
     Box.add(AddTask);
   }
 }

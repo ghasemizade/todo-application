@@ -6,30 +6,33 @@ part of 'todo.dart';
 // TypeAdapterGenerator
 // **************************************************************************
 
-class taskAdapter extends TypeAdapter<task> {
+class TaskAdapter extends TypeAdapter<Task> {
   @override
   final int typeId = 1;
 
   @override
-  task read(BinaryReader reader) {
+  Task read(BinaryReader reader) {
     final numOfFields = reader.readByte();
     final fields = <int, dynamic>{
       for (int i = 0; i < numOfFields; i++) reader.readByte(): reader.read(),
     };
-    return task(
+    return Task(
       title: fields[0] as String,
       subTitle: fields[1] as String,
+      isDone: fields[2] as bool,
     );
   }
 
   @override
-  void write(BinaryWriter writer, task obj) {
+  void write(BinaryWriter writer, Task obj) {
     writer
-      ..writeByte(2)
+      ..writeByte(3)
       ..writeByte(0)
       ..write(obj.title)
       ..writeByte(1)
-      ..write(obj.subTitle);
+      ..write(obj.subTitle)
+      ..writeByte(2)
+      ..write(obj.isDone);
   }
 
   @override
@@ -38,7 +41,7 @@ class taskAdapter extends TypeAdapter<task> {
   @override
   bool operator ==(Object other) =>
       identical(this, other) ||
-      other is taskAdapter &&
+      other is TaskAdapter &&
           runtimeType == other.runtimeType &&
           typeId == other.typeId;
 }
