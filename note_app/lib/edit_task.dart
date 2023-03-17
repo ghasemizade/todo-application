@@ -4,25 +4,30 @@ import 'package:note_app/home_screen.dart';
 import 'package:note_app/todo.dart';
 import 'package:time_pickerr/time_pickerr.dart';
 
-class addTaskScreen extends StatefulWidget {
-  const addTaskScreen({super.key});
-
+class editTaskScreen extends StatefulWidget {
+  editTaskScreen({super.key, required this.task});
+  Task task;
   @override
-  State<addTaskScreen> createState() => _addTaskScreenState();
+  State<editTaskScreen> createState() => _editTaskScreenState();
 }
 
-class _addTaskScreenState extends State<addTaskScreen> {
+class _editTaskScreenState extends State<editTaskScreen> {
   FocusNode wicher0 = FocusNode();
   FocusNode wicher1 = FocusNode();
 
-  final TextEditingController textFiledTaskTitle = TextEditingController();
-  final TextEditingController textFiledTaskSubTitle = TextEditingController();
+  TextEditingController? textFiledTaskTitle;
+  TextEditingController? textFiledTaskSubTitle;
 
   DateTime? _time;
+
   final Box = Hive.box<Task>('taskBox');
   @override
   void initState() {
     super.initState();
+
+    textFiledTaskTitle = TextEditingController(text: widget.task.title);
+    textFiledTaskSubTitle = TextEditingController(text: widget.task.subTitle);
+
     wicher0.addListener(() {
       setState(() {});
     });
@@ -171,9 +176,9 @@ class _addTaskScreenState extends State<addTaskScreen> {
                 borderRadius: BorderRadius.circular(15),
                 child: ElevatedButton(
                   onPressed: () {
-                    String taskTitle = textFiledTaskTitle.text;
-                    String taskSubTitle = textFiledTaskSubTitle.text;
-                    addTask(taskTitle, taskSubTitle);
+                    String taskTitle = textFiledTaskTitle!.text;
+                    String taskSubTitle = textFiledTaskSubTitle!.text;
+                    editTask(taskTitle, taskSubTitle);
                     Navigator.of(context).pop();
                   },
                   child: Text(
@@ -196,9 +201,11 @@ class _addTaskScreenState extends State<addTaskScreen> {
     );
   }
 
-  addTask(String taskTitle, String taskSubTitle) {
-    var AddTask = Task(title: taskTitle, subTitle: taskSubTitle, time: _time!);
-    Box.add(AddTask);
+  editTask(String taskTitle, String taskSubTitle) {
+    widget.task.title = taskTitle;
+    widget.task.subTitle = taskSubTitle;
+    widget.task.time = _time!;
+    widget.task.save();
   }
 
   void _navigateToBackHome(BuildContext context) {

@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:msh_checkbox/msh_checkbox.dart';
+import 'package:note_app/edit_task.dart';
 import 'package:note_app/todo.dart';
 
 class taskWidget extends StatefulWidget {
@@ -123,7 +124,7 @@ class _taskWidgetState extends State<taskWidget> {
             child: Row(
               children: [
                 Text(
-                  '12:00',
+                  '${widget.task.time.hour}:${getAddzeroUnderTen(widget.task.time)}',
                   style: TextStyle(
                     color: Colors.white,
                   ),
@@ -138,30 +139,48 @@ class _taskWidgetState extends State<taskWidget> {
           width: 15,
         ),
         // Edit
-        Container(
-          height: 30,
-          width: 80,
-          decoration: BoxDecoration(
-            color: Color(0xffE2F6F1),
-            borderRadius: BorderRadius.circular(30),
-          ),
-          child: Padding(
-            padding: EdgeInsets.symmetric(horizontal: 10, vertical: 6),
-            child: Row(
-              children: [
-                Text(
-                  'edit',
-                  style: TextStyle(
-                    color: Color(0xff18daa3),
+        InkWell(
+          onTap: () {
+            Navigator.of(context).push(
+              MaterialPageRoute(
+                  builder: (context) => editTaskScreen(
+                        task: widget.task,
+                      )),
+            );
+          },
+          child: Container(
+            height: 30,
+            width: 80,
+            decoration: BoxDecoration(
+              color: Color(0xffE2F6F1),
+              borderRadius: BorderRadius.circular(30),
+            ),
+            child: Padding(
+              padding: EdgeInsets.symmetric(horizontal: 10, vertical: 6),
+              child: Row(
+                children: [
+                  Text(
+                    'edit',
+                    style: TextStyle(
+                      color: Color(0xff18daa3),
+                    ),
                   ),
-                ),
-                Spacer(),
-                Image.asset('assets/images/icon_edit.png'),
-              ],
+                  Spacer(),
+                  Image.asset('assets/images/icon_edit.png'),
+                ],
+              ),
             ),
           ),
         ),
       ],
     );
+  }
+
+  String getAddzeroUnderTen(DateTime time) {
+    if (time.minute < 10) {
+      return '0${time.minute}';
+    } else {
+      return time.minute.toString();
+    }
   }
 }
