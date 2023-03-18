@@ -1,1 +1,1 @@
-enum TaskTypeEnum { working, date, focus }
+enum TaskTypeEnum { working, date, focus, workout }

@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:fluttertoast/fluttertoast.dart';
 import 'package:hive/hive.dart';
 import 'package:note_app/home_screen.dart';
+import 'package:note_app/task_type.dart';
 import 'package:note_app/todo.dart';
 import 'package:note_app/utility.dart';
 import 'package:time_pickerr/time_pickerr.dart';
@@ -182,7 +183,9 @@ class _addTaskScreenState extends State<addTaskScreen> {
                       scrollDirection: Axis.horizontal,
                       itemCount: getTaskTypeList().length,
                       itemBuilder: (context, index) {
-                        return TaskTypeItems();
+                        return TaskTypeItems(
+                          taskType: getTaskTypeList()[index],
+                        );
                       },
                     ),
                   ),
@@ -282,23 +285,25 @@ class _addTaskScreenState extends State<addTaskScreen> {
 }
 
 class TaskTypeItems extends StatelessWidget {
-  const TaskTypeItems({
-    super.key,
-  });
+  TaskTypeItems({super.key, required this.taskType});
 
+  TaskType taskType;
   @override
   Widget build(BuildContext context) {
     return Center(
       child: Padding(
         padding: EdgeInsets.all(15),
-        child: Container(
-          width: 140,
-          color: Colors.amberAccent,
-          child: Column(
-            children: [
-              Image.asset('assets/images/meditate.png'),
-              Text('Meditation'),
-            ],
+        child: ClipRRect(
+          borderRadius: BorderRadius.circular(30),
+          child: Container(
+            width: 140,
+            color: Color.fromARGB(108, 212, 212, 212),
+            child: Column(
+              children: [
+                Image.asset(taskType.image),
+                Text(taskType.title),
+              ],
+            ),
           ),
         ),
       ),
