@@ -172,8 +172,12 @@ class _addTaskScreenState extends State<addTaskScreen> {
                   onPressed: () {
                     String taskTitle = textFiledTaskTitle.text;
                     String taskSubTitle = textFiledTaskSubTitle.text;
-                    addTask(taskTitle, taskSubTitle);
-                    Navigator.of(context).pop();
+                    if (taskTitle == '') {
+                      print('title is empty');
+                    } else {
+                      addTask(taskTitle, taskSubTitle);
+                      Navigator.of(context).pop();
+                    }
                   },
                   child: Text(
                     'Add Task',
