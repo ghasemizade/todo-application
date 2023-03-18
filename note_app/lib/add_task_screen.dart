@@ -3,6 +3,7 @@ import 'package:fluttertoast/fluttertoast.dart';
 import 'package:hive/hive.dart';
 import 'package:note_app/home_screen.dart';
 import 'package:note_app/todo.dart';
+import 'package:note_app/utility.dart';
 import 'package:time_pickerr/time_pickerr.dart';
 
 class addTaskScreen extends StatefulWidget {
@@ -172,9 +173,22 @@ class _addTaskScreenState extends State<addTaskScreen> {
                       child: buildButtonName(),
                     ),
                   ),
-                  Spacer(),
                   SizedBox(
-                    height: 30,
+                    height: 20,
+                  ),
+                  Container(
+                    height: 200,
+                    child: ListView.builder(
+                      scrollDirection: Axis.horizontal,
+                      itemCount: getTaskTypeList().length,
+                      itemBuilder: (context, index) {
+                        return TaskTypeItems();
+                      },
+                    ),
+                  ),
+                  // Spacer(),
+                  SizedBox(
+                    height: 20,
                   ),
                   ClipRRect(
                     borderRadius: BorderRadius.circular(15),
@@ -263,6 +277,31 @@ class _addTaskScreenState extends State<addTaskScreen> {
       ),
       height: 44,
       width: 200,
+    );
+  }
+}
+
+class TaskTypeItems extends StatelessWidget {
+  const TaskTypeItems({
+    super.key,
+  });
+
+  @override
+  Widget build(BuildContext context) {
+    return Center(
+      child: Padding(
+        padding: EdgeInsets.all(15),
+        child: Container(
+          width: 140,
+          color: Colors.amberAccent,
+          child: Column(
+            children: [
+              Image.asset('assets/images/meditate.png'),
+              Text('Meditation'),
+            ],
+          ),
+        ),
+      ),
     );
   }
 }
