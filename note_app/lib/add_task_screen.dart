@@ -1,3 +1,6 @@
+import 'dart:ffi';
+
+import 'package:carousel_slider/carousel_slider.dart';
 import 'package:flutter/material.dart';
 import 'package:fluttertoast/fluttertoast.dart';
 import 'package:hive/hive.dart';
@@ -20,7 +23,7 @@ class _addTaskScreenState extends State<addTaskScreen> {
 
   final TextEditingController textFiledTaskTitle = TextEditingController();
   final TextEditingController textFiledTaskSubTitle = TextEditingController();
-
+  // int selectedIndex;
   DateTime? _time;
   final Box = Hive.box<Task>('taskBox');
   @override
@@ -161,7 +164,6 @@ class _addTaskScreenState extends State<addTaskScreen> {
                     child: ElevatedButton(
                       style: ElevatedButton.styleFrom(
                         backgroundColor: Color(0xff18DAA3),
-                        minimumSize: Size(200, 44),
                       ),
                       onPressed: () {
                         showDialog(
@@ -195,31 +197,34 @@ class _addTaskScreenState extends State<addTaskScreen> {
                   ),
                   ClipRRect(
                     borderRadius: BorderRadius.circular(15),
-                    child: ElevatedButton(
-                      onPressed: () {
-                        String taskTitle = textFiledTaskTitle.text;
-                        String taskSubTitle = textFiledTaskSubTitle.text;
-                        if (taskTitle == '') {
-                          Fluttertoast.showToast(
-                              msg: 'title is empty',
-                              toastLength: Toast.LENGTH_SHORT,
-                              gravity: ToastGravity.CENTER,
-                              timeInSecForIosWeb: 1,
-                              backgroundColor: Colors.red,
-                              textColor: Colors.white,
-                              fontSize: 16.0);
-                        } else {
-                          addTask(taskTitle, taskSubTitle);
-                          Navigator.of(context).pop();
-                        }
-                      },
-                      child: Text(
-                        'Add Task',
-                        style: TextStyle(fontFamily: 'lato', fontSize: 20),
-                      ),
-                      style: ElevatedButton.styleFrom(
-                        backgroundColor: Color(0xff18daa3),
-                        minimumSize: Size(200, 44),
+                    child: SizedBox(
+                      height: 44,
+                      width: 200,
+                      child: ElevatedButton(
+                        onPressed: () {
+                          String taskTitle = textFiledTaskTitle.text;
+                          String taskSubTitle = textFiledTaskSubTitle.text;
+                          if (taskTitle == '') {
+                            Fluttertoast.showToast(
+                                msg: 'title is empty',
+                                toastLength: Toast.LENGTH_SHORT,
+                                gravity: ToastGravity.CENTER,
+                                timeInSecForIosWeb: 1,
+                                backgroundColor: Colors.red,
+                                textColor: Colors.white,
+                                fontSize: 16.0);
+                          } else {
+                            addTask(taskTitle, taskSubTitle);
+                            Navigator.of(context).pop();
+                          }
+                        },
+                        child: Text(
+                          'Add Task',
+                          style: TextStyle(fontFamily: 'lato', fontSize: 20),
+                        ),
+                        style: ElevatedButton.styleFrom(
+                          backgroundColor: Color(0xff18daa3),
+                        ),
                       ),
                     ),
                   ),
