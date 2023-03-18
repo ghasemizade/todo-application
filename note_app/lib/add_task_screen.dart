@@ -144,27 +144,26 @@ class _addTaskScreenState extends State<addTaskScreen> {
                   ),
                 ),
               ),
-              CustomHourPicker(
-                title: 'Set Time',
-                positiveButtonText: 'Ok',
-                negativeButtonText: 'Cancel',
-                titleStyle: TextStyle(
-                  color: Color(0xff18DAA3),
-                  fontFamily: 'lato',
-                  fontWeight: FontWeight.bold,
-                  fontSize: 20,
+              SizedBox(
+                height: 50,
+              ),
+              ClipRRect(
+                borderRadius: BorderRadius.circular(15),
+                child: ElevatedButton(
+                  style: ElevatedButton.styleFrom(
+                    backgroundColor: Color(0xff18DAA3),
+                    minimumSize: Size(200, 44),
+                  ),
+                  onPressed: () {
+                    showDialog(
+                      context: context,
+                      builder: (BuildContext context) {
+                        return getCustomHourPicker();
+                      },
+                    );
+                  },
+                  child: buildButtonName(),
                 ),
-                negativeButtonStyle: TextStyle(
-                  color: Colors.red,
-                ),
-                positiveButtonStyle: TextStyle(
-                  color: Color(0xff18DAA3),
-                ),
-                elevation: 5,
-                onPositivePressed: (context, time) {
-                  _time = time;
-                },
-                onNegativePressed: (context) {},
               ),
               Spacer(),
               ClipRRect(
@@ -196,6 +195,31 @@ class _addTaskScreenState extends State<addTaskScreen> {
     );
   }
 
+  CustomHourPicker getCustomHourPicker() {
+    return CustomHourPicker(
+      title: 'Set Time',
+      positiveButtonText: 'Ok',
+      negativeButtonText: 'Cancel',
+      titleStyle: TextStyle(
+        color: Color(0xff18DAA3),
+        fontFamily: 'lato',
+        fontWeight: FontWeight.bold,
+        fontSize: 20,
+      ),
+      negativeButtonStyle: TextStyle(
+        color: Colors.red,
+      ),
+      positiveButtonStyle: TextStyle(
+        color: Color(0xff18DAA3),
+      ),
+      elevation: 5,
+      onPositivePressed: (context, time) {
+        _time = time;
+      },
+      onNegativePressed: (context) {},
+    );
+  }
+
   addTask(String taskTitle, String taskSubTitle) {
     var AddTask = Task(title: taskTitle, subTitle: taskSubTitle, time: _time!);
     Box.add(AddTask);
@@ -204,5 +228,18 @@ class _addTaskScreenState extends State<addTaskScreen> {
   void _navigateToBackHome(BuildContext context) {
     Navigator.of(context)
         .push(MaterialPageRoute(builder: (context) => homeScreen()));
+  }
+
+  SizedBox buildButtonName() {
+    return SizedBox(
+      child: Center(
+        child: Text(
+          "Set Time",
+          style: TextStyle(fontSize: 20, fontFamily: 'lato'),
+        ),
+      ),
+      height: 44,
+      width: 200,
+    );
   }
 }
