@@ -25,6 +25,9 @@ class _addTaskScreenState extends State<addTaskScreen> {
   final TextEditingController textFiledTaskSubTitle = TextEditingController();
   // int selectedIndex;
   DateTime? _time;
+
+  int _selectedItemType = 0;
+
   final Box = Hive.box<Task>('taskBox');
   @override
   void initState() {
@@ -185,8 +188,13 @@ class _addTaskScreenState extends State<addTaskScreen> {
                       scrollDirection: Axis.horizontal,
                       itemCount: getTaskTypeList().length,
                       itemBuilder: (context, index) {
-                        return TaskTypeItems(
-                          taskType: getTaskTypeList()[index],
+                        return InkWell(
+                          onTap: () {
+                            _selectedItemType = index;
+                          },
+                          child: TaskTypeItems(
+                            taskType: getTaskTypeList()[index],
+                          ),
                         );
                       },
                     ),
@@ -290,9 +298,16 @@ class _addTaskScreenState extends State<addTaskScreen> {
 }
 
 class TaskTypeItems extends StatelessWidget {
-  TaskTypeItems({super.key, required this.taskType});
+  TaskTypeItems(
+      {super.key,
+      required this.taskType,
+      required this.index,
+      required this.selectedItemList});
 
   TaskType taskType;
+  int index;
+  int selectedItemList;
+
   @override
   Widget build(BuildContext context) {
     return Center(
@@ -301,8 +316,14 @@ class TaskTypeItems extends StatelessWidget {
         child: ClipRRect(
           borderRadius: BorderRadius.circular(30),
           child: Container(
+            decoration: BoxDecoration(
+              border: Border.all(
+                color: Color(0xff18DAA3),
+                width: 2.5,
+              ),
+            ),
             width: 140,
-            color: Color.fromARGB(108, 212, 212, 212),
+            // color: Color.fromARGB(0, 212, 212, 212),
             child: Column(
               children: [
                 Image.asset(taskType.image),
