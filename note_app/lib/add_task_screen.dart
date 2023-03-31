@@ -190,10 +190,14 @@ class _addTaskScreenState extends State<addTaskScreen> {
                       itemBuilder: (context, index) {
                         return InkWell(
                           onTap: () {
-                            _selectedItemType = index;
+                            setState(() {
+                              _selectedItemType = index;
+                            });
                           },
                           child: TaskTypeItems(
                             taskType: getTaskTypeList()[index],
+                            index: index,
+                            selectedItemList: _selectedItemType,
                           ),
                         );
                       },
@@ -318,7 +322,9 @@ class TaskTypeItems extends StatelessWidget {
           child: Container(
             decoration: BoxDecoration(
               border: Border.all(
-                color: Color(0xff18DAA3),
+                color: (selectedItemList == index
+                    ? Color(0xff18daa3)
+                    : Colors.transparent),
                 width: 2.5,
               ),
             ),
